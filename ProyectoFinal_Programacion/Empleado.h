@@ -20,9 +20,9 @@ private:
 public:
 	Empleado() {
 	}
-	Empleado(string nom, string ape, string dir, int tel, bool gen,string dpi,int id_puesto, string fn, string fecha_inilab, string fecha_ingre) : Persona(nom, ape, dir, tel, gen) {
+	Empleado(string nom, string ape, string dir,string fn, int tel, bool gen,string dpi,int id_puesto, string fecha_inilab, string fecha_ingre) : Persona(nom,ape,dir,fn,tel,gen) {
 
-		fecha_nacimiento = fn;
+		//fecha_nacimiento = fn;
 		fecha_inicio_labores = fecha_inilab;
 		fechaingreso = fecha_ingre;
 		DPI = dpi;
@@ -38,20 +38,26 @@ public:
 		MYSQL_ROW fila;
 		MYSQL_RES* resultado;
 		cn.abrir_conexion();
-		cout << "id_e" << "| " << "nombres" << " | " << "apellidos" << " | " << "direccion" << " | " << "telefono" << " | " << "DPI\t\t" << " | " << "SEXO" << " | " << "F_NAC" << " | " << "PUESTO" << " | " << "F_INICIO_LABORAR" << " | " << "F_INGRESO" << " | " << endl;
+		//cout << "id_e" << "| " << "nombres" << " | " << "apellidos" << " | " << "direccion" << " | " << "telefono" << " | " << "DPI\t\t" << " | " << "SEXO" << " | " << "F_NAC" << " | " << "PUESTO" << " | " << "F_INICIO_LABORAR" << " | " << "F_INGRESO" << " | " << endl;
 
 		if (cn.getconectar()) {
-			string consulta = "select *from empleados";
+			string consulta =
+				"select e.idempleado,e.nombres,e.apellidos,e.direccion,e.telefono,e.dpi, CASE when e.genero = 1 then 'masculino' when e.genero = 0 then 'femenino' end as generotext,e.fecha_nacimiento, p.puesto, e.fecha_inicio_labores, e.fechaingreso from empleados as e inner join puestos as p on e.idpuesto=p.idPuesto;";
 			const char* con = consulta.c_str(); //convertimos a char
 			q_estado = mysql_query(cn.getconectar(), con);
 			if (!q_estado) {
 				resultado = mysql_store_result(cn.getconectar());
 
 				while (fila = mysql_fetch_row(resultado)) {
-					for (int i = 0; i <= 10; i++) {
+					/*for (int i = 0; i <= 10; i++) {
 						cout << fila[i] << " , ";
 					}
-					cout << endl;
+					cout << endl;*/
+					cout << "Id empleado: " << fila[0] << "\tDPI: " << fila[5] <<"\tPuesto:"<<fila[8] << endl;
+					cout << "Nombre: " << fila[1] << " " << fila[2] << endl;
+					cout << "Direccion: " << fila[3] << "\tTelefono: " << fila[4] << "\tGenero: " << fila[6] << endl;
+					cout << "Fecha de nacimiento: " << fila[7] << endl;
+					cout << "Inicio de labores: " << fila[9] << "\tFecha ingreso: " << fila[10] << endl << endl;
 				}
 			}
 			else {
@@ -68,17 +74,17 @@ public:
 		int q_estado;
 		ConexionBD cn = ConexionBD();
 		cn.abrir_conexion();
-		string aux_i = to_string(telefono);
-		string aux_ii = to_string(idpuesto);
-		string aux_iii = to_string(genero);
+		string t = to_string(telefono);
+		string ip = to_string(idpuesto);
+		string gen = to_string(genero);
 
 		if (cn.getconectar()) {
 			string insert =
-				"INSERT INTO empleados(nombres, apellidos, direccion, telefono, dpi, genero, fecha_nacimiento, idpuesto, fecha_inicio_labores, fechaingreso)VALUES('"+ nombres +"', '"+ apellidos +"', '"+ direccion +"', '"+ aux_i +"', '"+ DPI +"', "+ aux_iii +", '"+ fecha_nacimiento+ "', '"+ aux_ii +"', '"+ fecha_inicio_labores +"', '"+ fechaingreso+ "');";
+				"INSERT INTO empleados(nombres, apellidos, direccion, telefono, dpi, genero, fecha_nacimiento, idpuesto, fecha_inicio_labores, fechaingreso)VALUES('"+ nombres +"', '"+ apellidos +"', '"+ direccion +"', '"+ t +"', '"+ DPI +"', "+ gen +", '"+ fecha_nacimiento+ "', '"+ ip +"', '"+ fecha_inicio_labores +"', '"+ fechaingreso+ "');";
 			const char* i = insert.c_str();
 			q_estado = mysql_query(cn.getconectar(), i);
 			if (!q_estado) {
-				cout << "ingreseo exitoso !!!!!!!!" << endl;
+				cout << "ingreso exitoso !!!!!!!!" << endl;
 			}
 			else {
 				cout << "xxx ERROR AL HACER INSERT xxx" << endl;
@@ -123,7 +129,7 @@ public:
 		cn.abrir_conexion();
 		string where = to_string(x);
 		if (cn.getconectar()) {
-			string eliminar = "delete from empleados where idempleado = " + where + ";";
+			string eliminar = "delete from empleados where dpi = " + where + ";";
 			const char* eli = eliminar.c_str();
 			q_estado = mysql_query(cn.getconectar(), eli);
 			if (!q_estado) {
@@ -146,20 +152,26 @@ public:
 		MYSQL_RES* resultado;
 		string aux_busqueda = to_string(x);
 		cn.abrir_conexion();
-		cout << "id_e" << "| " << "nombres" << " | " << "apellidos" << " | " << "direccion" << " | " << "telefono" << " | " << "DPI\t\t" << " | " << "SEXO" << " | " << "F_NAC" << " | " << "PUESTO" << " | " << "F_INICIO_LABORAR" << " | " << "F_INGRESO" << " | " << endl;
+		//cout << "id_e" << "| " << "nombres" << " | " << "apellidos" << " | " << "direccion" << " | " << "telefono" << " | " << "DPI\t\t" << " | " << "SEXO" << " | " << "F_NAC" << " | " << "PUESTO" << " | " << "F_INICIO_LABORAR" << " | " << "F_INGRESO" << " | " << endl;
 
 		if (cn.getconectar()) {
-			string consulta = "select *from empleados where idempleado="+aux_busqueda+";";
+			string consulta = "select e.idempleado,e.nombres,e.apellidos,e.direccion,e.telefono,e.dpi, CASE when e.genero = 1 then 'masculino' when e.genero = 0 then 'femenino' end as generotext,e.fecha_nacimiento, p.puesto, e.fecha_inicio_labores, e.fechaingreso from empleados as e inner join puestos as p on e.idpuesto=p.idPuesto where dpi="+aux_busqueda+";";
 			const char* con = consulta.c_str(); //convertimos a char
 			q_estado = mysql_query(cn.getconectar(), con);
 			if (!q_estado) {
 				resultado = mysql_store_result(cn.getconectar());
 
 				while (fila = mysql_fetch_row(resultado)) {
-					for (int i = 0; i <= 10; i++) {
+				/*	for (int i = 0; i <= 10; i++) {
 						cout << fila[i] << " , ";
 					}
-					cout << endl;
+					cout << endl;*/
+					cout << "Id empleado: " << fila[0] << "\tDPI: " << fila[5] << "\tPuesto:" << fila[8] << endl;
+					cout << "Nombre: " << fila[1] << " " << fila[2] << endl;
+					cout << "Direccion: " << fila[3] << "\tTelefono: " << fila[4] << "\tGenero: " << fila[6] << endl;
+					cout << "Fecha de nacimiento: " << fila[7] << endl;
+					cout << "Inicio de labores: " << fila[9] << "\tFecha ingreso: " << fila[10] << endl << endl;
+
 				}
 			}
 			else {
@@ -173,20 +185,18 @@ public:
 	}
 
 	///////////////////////////
-	void actualizar() {
+	void actualizar(int x) {
+	
 		int q_estado = 0;
 		ConexionBD cn = ConexionBD();
 		cn.abrir_conexion();
-		int aux;
-		cout << "ingrese id a actualizar " << endl;
-		cin >> aux;
-		string aux_j = to_string(telefono);
-		string auxi = to_string(genero);
-		string auxii = to_string(idpuesto);
-		string i = to_string(aux);
 		
+		string tel = to_string(telefono);
+		string gentext = to_string(genero);
+		string id_puesto = to_string(idpuesto);
+		string i = to_string(x);
 		if (cn.getconectar()) {
-			string update = "update empleados SET nombres = '" + nombres + "', apellidos = '" + apellidos + "', direccion = '" + direccion + "', telefono = '" + aux_j + "',dpi = '" + DPI + "', genero =" + auxi + ", fecha_nacimiento = '" + fecha_nacimiento + "', idpuesto = " + auxii + ", fecha_inicio_labores = '" + fecha_inicio_labores + "', fechaingreso = '" + fechaingreso + "',where idempleado = " + i + ";";
+			string update = "update empleados SET nombres = '" + nombres + "', apellidos = '" + apellidos + "', direccion = '" + direccion + "', telefono = '" + tel + "', genero =" + gentext + ", fecha_nacimiento = '" + fecha_nacimiento + "', idpuesto = " + id_puesto + ", fecha_inicio_labores = '" + fecha_inicio_labores + "', fechaingreso = '" + fechaingreso + "' where dpi = " + i + ";";
 			const char* upda = update.c_str();
 			q_estado = mysql_query(cn.getconectar(), upda);
 			if (!q_estado) {

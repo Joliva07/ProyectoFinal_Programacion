@@ -39,7 +39,10 @@
     <ClCompile Include="Marcas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Proveedores.cpp">
+    <ClCompile Include="Proveedor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Compra.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,22 +53,25 @@
     <ClInclude Include="ConexionBD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cProducto.h">
+    <ClInclude Include="Producto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Clientes.h">
+    <ClInclude Include="Cliente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Empleados.h">
+    <ClInclude Include="Empleado.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Puestos.h">
+    <ClInclude Include="Puesto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Marcas.h">
+    <ClInclude Include="Marca.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Proveedores.h">
+    <ClInclude Include="Proveedor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Compra.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
