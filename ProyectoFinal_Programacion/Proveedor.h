@@ -6,17 +6,17 @@
 #include<string>
 using namespace std;
 
-class Proveedores : public Persona {
+class Proveedor : public Persona {
 
 
 public: string nit;
 
 public:
-	Proveedores() {
+	Proveedor() {
 	}
 	/*a y g son solo variables que no tienen proposito, solo estan ahi porque la clase persona las necesita instanciadas
 	ademas el nombre del proveedor aqui lo estoy considerando como nombre de la clase persona*/
-	Proveedores(string nom,string ape,string dir,string fn,int tel, bool gen, string numero_identificacion_t) :Persona (nom,ape,dir,fn,tel,gen) {
+	Proveedor(string nom,string ape,string dir,string fn,int tel, bool gen, string numero_identificacion_t) :Persona (nom,ape,dir,fn,tel,gen) {
 		
 		nit = numero_identificacion_t;
 	}
@@ -57,6 +57,43 @@ public:
 
 		if (cn.getconectar()) {
 			string consulta = "select * from proveedores";
+			const char* c = consulta.c_str();
+			q_query = mysql_query(cn.getconectar(), c);
+			cout << "\n---------- PROVEEDORES ----------\n";
+			//cout << "\nidproveedores, nombres, nit, direccion, telefono\n\n";
+			if (!q_query) {
+				resultado = mysql_store_result(cn.getconectar());
+				while (fila = mysql_fetch_row(resultado)) {
+					/*for (int i = 0; i <= 4; i++) {
+						cout << fila[i] << " , ";
+					}
+					cout << endl;*/
+					cout << "Nit: " << fila[2] << endl;
+					cout << "Proveedor: " << fila[1] << endl;
+					cout << "Direccion: " << fila[3] << "\tTelefono: " << fila[4] << endl << endl;
+
+				}
+			}
+			else {
+				cout << "Error al consultar\n";
+			}
+		}
+		else {
+			cout << "Error";
+		}
+		cn.cerrar_conexion();
+	}
+
+	void leer(int x) {
+		int q_query;
+		ConexionBD cn = ConexionBD();
+		MYSQL_ROW fila;
+		MYSQL_RES* resultado;
+		string ip = to_string(x);
+		cn.abrir_conexion();
+
+		if (cn.getconectar()) {
+			string consulta = "select * from proveedores where nit=" + ip + ";";
 			const char* c = consulta.c_str();
 			q_query = mysql_query(cn.getconectar(), c);
 			cout << "\n---------- PROVEEDORES ----------\n";
@@ -133,6 +170,11 @@ public:
 		cn.cerrar_conexion();
 	}
 
+	//void setProducto(string pro) { producto = pro; }
+	void setProveedor(string nom) { nombres = nom; }
+	void setNit(string n) { nit = n; }
+	void setDireccion(string dir) { direccion = dir; }
+	void setTelefono(int tel) { telefono = tel; }
 
 
 };

@@ -146,13 +146,14 @@
     <ClCompile Include="Clientes.cpp" />
     <ClCompile Include="Compra.cpp" />
     <ClCompile Include="ConexionBD.cpp" />
-    <ClCompile Include="cProducto.cpp" />
+    <ClCompile Include="Producto.cpp" />
     <ClCompile Include="Empleados.cpp" />
     <ClCompile Include="Marcas.cpp" />
     <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Proveedor.cpp" />
     <ClCompile Include="ProyectoFinal_Programacion.cpp" />
     <ClCompile Include="Puestos.cpp" />
+    <ClCompile Include="Venta.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cliente.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Persona.h" />
     <ClInclude Include="Proveedor.h" />
     <ClInclude Include="Puesto.h" />
+    <ClInclude Include="Venta.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

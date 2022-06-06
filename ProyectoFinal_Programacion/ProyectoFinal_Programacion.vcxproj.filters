@@ -24,7 +24,7 @@
     <ClCompile Include="ConexionBD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cProducto.cpp">
+    <ClCompile Include="Producto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Clientes.cpp">
@@ -43,6 +43,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Compra.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Venta.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Compra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Venta.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
