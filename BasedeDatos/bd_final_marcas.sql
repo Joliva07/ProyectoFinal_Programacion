@@ -16,32 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `compras`
+-- Table structure for table `marcas`
 --
 
-DROP TABLE IF EXISTS `compras`;
+DROP TABLE IF EXISTS `marcas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `compras` (
-  `idcompra` int NOT NULL AUTO_INCREMENT,
-  `no_orden_compra` int NOT NULL,
-  `idproveedor` int NOT NULL,
-  `fecha_orden` date NOT NULL,
-  `fechaingreso` datetime NOT NULL,
-  PRIMARY KEY (`idcompra`),
-  KEY `idproveedores_proveedores_compras_idx` (`idproveedor`),
-  CONSTRAINT `idproveedores_proveedores_compras` FOREIGN KEY (`idproveedor`) REFERENCES `proveedores` (`idproveedores`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `marcas` (
+  `idmarca` smallint NOT NULL AUTO_INCREMENT,
+  `marca` varchar(50) NOT NULL,
+  PRIMARY KEY (`idmarca`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `compras`
---
-
-LOCK TABLES `compras` WRITE;
-/*!40000 ALTER TABLE `compras` DISABLE KEYS */;
-/*!40000 ALTER TABLE `compras` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -52,4 +38,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26 16:19:21
+-- Dump completed on 2022-06-07 13:57:34

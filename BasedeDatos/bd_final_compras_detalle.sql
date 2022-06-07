@@ -16,34 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ventas_detalle`
+-- Table structure for table `compras_detalle`
 --
 
-DROP TABLE IF EXISTS `ventas_detalle`;
+DROP TABLE IF EXISTS `compras_detalle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ventas_detalle` (
-  `idventas_detalle` bigint NOT NULL,
-  `idventa` int NOT NULL,
+CREATE TABLE `compras_detalle` (
+  `idcompra_detalle` bigint NOT NULL AUTO_INCREMENT,
+  `idcompra` int NOT NULL,
   `idproducto` int NOT NULL,
-  `cantidad` varchar(45) NOT NULL,
-  `precio_unitario` decimal(8,2) NOT NULL,
-  PRIMARY KEY (`idventas_detalle`),
-  KEY `idventas_ventas_ventasdet_idx` (`idventa`),
-  KEY `idproducto_productos_dentasdet_idx` (`idproducto`),
-  CONSTRAINT `idproducto_productos_dentasdet` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproductos`) ON UPDATE CASCADE,
-  CONSTRAINT `idventas_ventas_ventasdet` FOREIGN KEY (`idventa`) REFERENCES `ventas` (`idventa`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `cantidad` int NOT NULL,
+  `precio_costo_unitario` decimal(8,2) NOT NULL,
+  PRIMARY KEY (`idcompra_detalle`),
+  KEY `idcompra_compras_comprasdet_idx` (`idcompra`),
+  KEY `idproductos_productos_comprasdet_idx` (`idproducto`),
+  CONSTRAINT `idcompra_compras_comprasdet` FOREIGN KEY (`idcompra`) REFERENCES `compras` (`idcompra`) ON UPDATE CASCADE,
+  CONSTRAINT `idproductos_productos_comprasdet` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproductos`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ventas_detalle`
---
-
-LOCK TABLES `ventas_detalle` WRITE;
-/*!40000 ALTER TABLE `ventas_detalle` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ventas_detalle` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -54,4 +45,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26 16:19:21
+-- Dump completed on 2022-06-07 13:57:34

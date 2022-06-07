@@ -476,13 +476,13 @@ public:
 				q_consulta = mysql_query(cn.getconectar(), c);
 				if (!q_consulta) {
 					float cant = 0.0;
-					cout << "Id venta\tId Producto\tproducto\tMarca\t\tcantidad\tprecio\t\tTotal" << endl;
+					cout << "Id Producto\tproducto\tMarca\t\tcantidad\tprecio\t\tTotal" << endl;
 					while (resultado = mysql_store_result(cn.getconectar())) {
 						fila = mysql_fetch_row(resultado);
 						cant = atof(fila[4]);
 						precioUnitario = atof(fila[4]);
 						total = cant * precioUnitario;
-						cout <<fila[0]<<"\t" << fila[2] << "\t" << fila[6] << "\t\t" << fila[15] << "\t\t" << fila[3] << "\t\t" << fila[4] << "\t\t" << total;
+						cout << fila[2] << "\t\t" << fila[6] << "\t\t" << fila[15] << "\t\t" << fila[3] << "\t\t" << fila[4] << "\t\t" << total;
 						t2 = t2 + total;
 					}
 				}
@@ -493,7 +493,7 @@ public:
 			else {
 				cout << "Error consulta";
 			}
-			cout << "\n\t\t\t\t\t\t    Total de la compra: " << t2 << endl << endl << endl;
+			cout << "\n\t\t\t\t\t\t\t    Total de la compra: " << t2 << endl << endl << endl;
 		}
 		cn.cerrar_conexion();
 	}
@@ -514,8 +514,7 @@ public:
 				resultado = mysql_store_result(cn.getconectar());
 				fila = mysql_fetch_row(resultado);
 				idventa = fila[0];
-				cout << "\nNo. Factura: " << fila[0] << "\tSerie: " << fila[3] << endl;
-				cout << "Fecha: " << fila[4] << endl;
+				cout << "\nNo. Factura: " << fila[0] << "\tSerie: " << fila[3] << "\tFecha: " << fila[4] << endl;
 				cout << "Nombre: " << fila[9] << " " << fila[10] << endl;
 				cout << "Nit: " << fila[11] << endl;
 				cout << "Atendido por: " << fila[17] << " " << fila[18] << endl;
@@ -534,13 +533,13 @@ public:
 			q_consulta = mysql_query(cn.getconectar(), c);
 			if (!q_consulta) {
 				float cant = 0.0;
-				cout << "Id\tproducto\tMarca\t\tcantidad\tprecio\t\tTotal" << endl;
+				cout << "Id\tId producto\tproducto\tMarca\t\tcantidad\tprecio\t\tTotal" << endl;
 				while (resultado = mysql_store_result(cn.getconectar())) {
 					fila = mysql_fetch_row(resultado);
 					cant = atof(fila[4]);
 					precioUnitario = atof(fila[5]);
 					total = cant * precioUnitario;
-					cout << fila[3] << "\t" << fila[7] << "\t\t" << fila[16] << "\t\t" << fila[4] << "\t\t" << fila[5] << "\t\t" << total;
+					cout << fila[0]<<"\t"<<fila[2] << "\t\t" << fila[6] << "\t\t" << fila[15] << "\t\t" << fila[3] << "\t\t" << fila[4] << "\t\t" << total;
 					t2 = t2 + total;
 				}
 			}
@@ -551,7 +550,7 @@ public:
 		else {
 			cout << "Error consulta";
 		}
-		cout << "\n\t\t\t\t\t\t    Total de la compra: " << t2 << endl << endl << endl;
+		cout << "\n\t\t\t\t\t\t\t\t    Total de la compra: " << t2 << endl << endl << endl;
 	}
 
 	void acVenta(string nf,string idc) {

@@ -4,6 +4,8 @@
 #include "Empleado.h"
 #include <string.h>
 #include <conio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "Compra.h"
 //nueva libreria, time.h
 #include <time.h>
@@ -18,6 +20,7 @@ using namespace std;
 int busqueda = 0;
 int op = 0, op2 = 0, op3 = 0;
 string calcular_hora();
+bool revision(string n);
 int main()
 {
 
@@ -246,30 +249,32 @@ int main()
 				cin.ignore();
 				cout << "ingrese NIT" << endl;
 				getline(cin, nit);
-				cout << "ingrese nombres" << endl;
-				getline(cin, nombres);
-				cout << "ingrese apellidos" << endl;
-				getline(cin, apellidos);
-				cout << "ingrese telefono" << endl;
-				cin >> telefono;
-				cout << "ingrese genero (m = masculino / f = femenino)" << endl;
-				cin >> genero1;
-				genero = genero1 == 'm' ? 1 : 0;
-				cin.ignore();
-				cout << "ingrese correo electronico" << endl;
-				getline(cin, correo);
-				fechaingreso = calcular_hora();
-				cout << "fecha/hora de ingreso" << fechaingreso << endl;;
-				obj2.setNombre(nombres);
-				obj2.setTelefono(telefono);
-				obj2.setNit(nit);
-				obj2.setGen(genero);
-				obj2.setFecha_in(fechaingreso);
-				obj2.setE_mail(correo);
-				obj2.setApellido(apellidos);
-				obj2.crear();
-				
-
+				if(revision(nit)==true) {
+					cout << "ingrese nombres" << endl;
+					getline(cin, nombres);
+					cout << "ingrese apellidos" << endl;
+					getline(cin, apellidos);
+					cout << "ingrese telefono" << endl;
+					cin >> telefono;
+					cout << "ingrese genero (m = masculino / f = femenino)" << endl;
+					cin >> genero1;
+					genero = genero1 == 'm' ? 1 : 0;
+					cin.ignore();
+					cout << "ingrese correo electronico" << endl;
+					getline(cin, correo);
+					fechaingreso = calcular_hora();
+					cout << "fecha/hora de ingreso" << fechaingreso << endl;;
+					obj2.setNombre(nombres);
+					obj2.setTelefono(telefono);
+					obj2.setNit(nit);
+					obj2.setGen(genero);
+					obj2.setFecha_in(fechaingreso);
+					obj2.setE_mail(correo);
+					obj2.setApellido(apellidos);
+					obj2.crear();
+				} else {
+					cout << "Numero de nit invalido" << endl;
+				}
 				break;
 				}
 				{
@@ -287,40 +292,45 @@ int main()
 				char valor;
 				cout << "ingrese nit para modificar" << endl;
 				cin >> busqueda;
-				obj2.leer(busqueda);
-				cout << "\nDesea modificar ? (s/n): ";
-				cin >> valor;
-				if (valor == 'n') {
-					break;
+				string n = to_string(busqueda);
+				if (revision(nit) == true) {
+					obj2.leer(busqueda);
+					cout << "\nDesea modificar ? (s/n): ";
+					cin >> valor;
+					if (valor == 'n') {
+						break;
+					}
+					cin.ignore();
+					//cout << "ingrese NIT" << endl;
+					//getline(cin, nit);
+					cout << "ingrese nombres" << endl;
+					getline(cin, nombres);
+					cout << "ingrese apellidos" << endl;
+					getline(cin, apellidos);
+					cout << "ingrese telefono" << endl;
+					cin >> telefono;
+					cout << "ingrese genero (m = masculino / f = femenino)" << endl;
+					cin >> genero1;
+					genero = genero1 == 'm' ? 1 : 0;
+					cin.ignore();
+					cout << "ingrese correo electronico" << endl;
+					getline(cin, correo);
+					fechaingreso = calcular_hora();
+					cout << "fecha/hora de ingreso" << fechaingreso << endl;
+					obj2.setNombre(nombres);
+					obj2.setTelefono(telefono);
+					obj2.setNit(nit);
+					obj2.setGen(genero);
+					obj2.setFecha_in(fechaingreso);
+					obj2.setE_mail(correo);
+					obj2.setApellido(apellidos);
+					obj2.actualizar(busqueda);
 				}
-				cin.ignore();
-				//cout << "ingrese NIT" << endl;
-				//getline(cin, nit);
-				cout << "ingrese nombres" << endl;
-				getline(cin, nombres);
-				cout << "ingrese apellidos" << endl;
-				getline(cin, apellidos);
-				cout << "ingrese telefono" << endl;
-				cin >> telefono;
-				cout << "ingrese genero (m = masculino / f = femenino)" << endl;
-				cin >> genero1;
-				genero = genero1 == 'm' ? 1 : 0;
-				cin.ignore();
-				cout << "ingrese correo electronico" << endl;
-				getline(cin, correo);
-				fechaingreso = calcular_hora();
-				cout << "fecha/hora de ingreso" << fechaingreso << endl;
-				obj2.setNombre(nombres);
-				obj2.setTelefono(telefono);
-				obj2.setNit(nit);
-				obj2.setGen(genero);
-				obj2.setFecha_in(fechaingreso);
-				obj2.setE_mail(correo);
-				obj2.setApellido(apellidos);
-				obj2.actualizar(busqueda);
+				else {
+					cout << "Numero de nit invalido"<<endl;
+				}
 				system("pause");
 				system("cls");
-
 				break;
 				}
 
@@ -330,14 +340,22 @@ int main()
 				char valor;
 				cout << "ingrese nit para eliminar" << endl;
 				cin >> busqueda;
-				obj2.leer(busqueda);
-				cout << "\nDesea eliminar ? (s/n): ";
-				cin >> valor;
-				if (valor == 'n') {
-					break;
+				string n = to_string(busqueda);
+				if (revision(nit) == true) {
+					obj2.leer(busqueda);
+					cout << "\nDesea eliminar ? (s/n): ";
+					cin >> valor;
+					if (valor == 'n') {
+						break;
+					}
+
+					obj2.eliminar(busqueda);
+				}
+				else {
+					cout << "Numero de nit invalido" << endl;
 				}
 
-				obj2.eliminar(busqueda);
+				system("cls");
 
 				break;
 				}
@@ -591,17 +609,22 @@ int main()
 			case 1: {
 				cout << "Ingrese el nit del proveedor:" << endl;
 				cin >> nit;
-				cout << "Ingrese el nombre del proveedor:" << endl;
-				getline(cin, nombres);
-				cout << "Ingrese la direccion: " << endl;
-				getline(cin, direccion);
-				cout << "Ingrese el numero de telefono: " << endl;
-				cin >> telefono;
-				pr.setProveedor(nombres);
-				pr.setNit(nit);
-				pr.setDireccion(direccion);
-				pr.setTelefono(telefono);
-				pr.crear();
+				if (revision(nit) == true) {
+					cout << "Ingrese el nombre del proveedor:" << endl;
+					getline(cin, nombres);
+					cout << "Ingrese la direccion: " << endl;
+					getline(cin, direccion);
+					cout << "Ingrese el numero de telefono: " << endl;
+					cin >> telefono;
+					pr.setProveedor(nombres);
+					pr.setNit(nit);
+					pr.setDireccion(direccion);
+					pr.setTelefono(telefono);
+					pr.crear();
+				}
+				else {
+					cout << "Numero de nit invalido" << endl;
+				}
 			}break;
 			
 			case 2: {
@@ -613,40 +636,53 @@ int main()
 			case 3: {
 				cout << "Ingrese el nit del proveedor para actualizar sus datos:" << endl;
 				cin >> busqueda;
-
-				pr.leer(busqueda);
-				cout << "Desea modificar los datos de este proveedor? (s/n)" << endl;
-				cin >> conf;
+				string n = to_string(busqueda);
+				if (revision(nit) == true) {
+					pr.leer(busqueda);
+					cout << "Desea modificar los datos de este proveedor? (s/n)" << endl;
+					cin >> conf;
 					if (conf == 'n') {
 						cout << "Accion cancelada";
 						break;
 					}
 
-				cout << "Ingrese el nombre del proveedor:" << endl;
-				cin >> nombres;
-				cout << "Ingrese la direccion: " << endl;
-				getline(cin, direccion);
-				cout << "Ingrese el numero de telefono: " << endl;
-				cin >> telefono;
-				pr.setProveedor(nombres);
-				pr.setDireccion(direccion);
-				pr.setTelefono(telefono);
-				pr.actualizar(busqueda);
+					cout << "Ingrese el nombre del proveedor:" << endl;
+					cin >> nombres;
+					cout << "Ingrese la direccion: " << endl;
+					getline(cin, direccion);
+					cout << "Ingrese el numero de telefono: " << endl;
+					cin >> telefono;
+					pr.setProveedor(nombres);
+					pr.setDireccion(direccion);
+					pr.setTelefono(telefono);
+					pr.actualizar(busqueda);
+				}
+				else {
+					cout<<"Numero de nit invalido" << endl;
+				}
+				
 
 			}break;
 
 			case 4: {
 				cout << "Ingrese el nit del proveedor para Eliminar sus datos:" << endl;
 				cin >> busqueda;
-				pr.leer(busqueda);
-				cout << "Desea eliminar los datos de este proveedor? (s/n)" << endl;
-				cin >> conf;
-				if (conf == 's') {
-					pr.eliminar(busqueda);
+				string n = to_string(busqueda);
+				if (revision(nit) == true) {
+					pr.leer(busqueda);
+					cout << "Desea eliminar los datos de este proveedor? (s/n)" << endl;
+					cin >> conf;
+					if (conf == 's') {
+						pr.eliminar(busqueda);
+					}
+					else {
+						cout << "Accion cancelada" << endl;
+					}
 				}
 				else {
-					cout << "Accion cancelada" << endl;
+					cout << "Numero de nit invalido" << endl;
 				}
+				system("pause");
 			}break;
 
 			case 5: {
@@ -677,49 +713,56 @@ int main()
 			system("cls");
 			cout << "Ingrese el nit del cliente: ";
 			cin >> idcliente;
-			fecha_inicio_lab = calcular_hora();
-			v.SetCl(idcliente);
-			v.SetFeFa(fecha_inicio_lab);
-			v.ingresoVentas();
-			cout << "\nIngresar codigo de empleado: ";
-			cin >> idempleado;
-			v.SetIdEm(idempleado);
+			if (revision(idcliente) == true) {
+				fecha_inicio_lab = calcular_hora();
+				v.SetCl(idcliente);
+				v.SetFeFa(fecha_inicio_lab);
+				v.ingresoVentas();
+				cout << "\nIngresar codigo de empleado: ";
+				cin >> idempleado;
+				v.SetIdEm(idempleado);
 
-			do {
-				cout << "\nIngrese Id del Producto: ";
-				cin >> idProducto;
-				cout << "Cantidad adquirida: ";
-				cin >> cantidad;
-				v.Setcant(cantidad);
-				v.ingresoCompraDet(idProducto);
-				idpd[i] = idProducto;
-				can[i] = cantidad;
-				pcu[i] = v.getPrecio();
-				if (i < 40) {
-					i++;
+				do {
+					cout << "\nIngrese Id del Producto: ";
+					cin >> idProducto;
+					cout << "Cantidad adquirida: ";
+					cin >> cantidad;
+					v.Setcant(cantidad);
+					v.ingresoCompraDet(idProducto);
+					idpd[i] = idProducto;
+					can[i] = cantidad;
+					pcu[i] = v.getPrecio();
+					if (i < 40) {
+						i++;
+					}
+					cout << "Desea ingresar otro producto? (s/n): ";
+					cin >> opcion;
+				} while (opcion == 's' || opcion == 'S');
+				cout << endl;
+				fechaingreso = calcular_hora();
+				v.SetFeFa(fecha_inicio_lab);
+				v.SetFeIn(fechaingreso);
+				v.insertVenta(idcliente);
+				for (int x = 0; x < i; x++) {
+					idProducto = idpd[x];
+					cantidad = can[x];
+					PrecioCostoUnitario = pcu[x];
+					total = cantidad * PrecioCostoUnitario;
+					totalventa = totalventa + total;
+					v.SetidP(idProducto);
+					v.Setcant(cantidad);
+					v.insertDetalle();
 				}
-				cout << "Desea ingresar otro producto? (s/n): ";
-				cin >> opcion;
-			} while (opcion == 's' || opcion == 'S');
-			cout << endl;
-			fechaingreso = calcular_hora();
-			v.SetFeFa(fecha_inicio_lab);
-			v.SetFeIn(fechaingreso);
-			v.insertVenta(idcliente);
-			for (int x = 0; x < i; x++) {
-				idProducto = idpd[x];
-				cantidad = can[x];
-				PrecioCostoUnitario = pcu[x];
-				total = cantidad * PrecioCostoUnitario;
-				totalventa = totalventa + total;
-				v.SetidP(idProducto);
-				v.Setcant(cantidad);
-				v.insertDetalle();
+				cout << "\nTotal de la compra: " << totalventa << endl;
+				system("pause");
+				system("cls");
+				v.factura();
 			}
-			cout << "\nTotal de la compra: " << totalventa << endl;;
-			system("pause");
-			system("cls");
-			v.factura();
+			else {
+				cout << "Numero de nit invalido" << endl;
+			}
+
+			
 			system("pause");
 		}break;
 
@@ -796,7 +839,7 @@ int main()
 				v.eliminar(nf);
 			}
 			else {
-				cout << "Accion cacelada" << endl;
+				cout << "Accion cancelada" << endl;
 			}
 		}break;
 		case 5: {
@@ -826,40 +869,46 @@ int main()
 				system("cls");
 				cout << "Ingrese el nit del Proveedor: ";
 				cin >> idProveedor;
-				cm.setProveedor(idProveedor);
-				cm.ingresoCompras();
-				do {
-					cout << "\nIngrese Id del Producto: ";
-					cin >> idProducto;
-					cm.ingresoCompraDet(idProducto);
-					cout << "Cantidad adquirida: ";
-					cin >> cantidad;
-					cout << "Costo unitario: ";
-					cin >> PrecioCostoUnitario;
-					idpd[i] = idProducto;
-					can[i] = cantidad;
-					pcu[i] = PrecioCostoUnitario;
-					if (i < 40) {
-						i++;
+				if (revision(idProveedor) == true) {
+					cm.setProveedor(idProveedor);
+					cm.ingresoCompras();
+					do {
+						cout << "\nIngrese Id del Producto: ";
+						cin >> idProducto;
+						cm.ingresoCompraDet(idProducto);
+						cout << "Cantidad adquirida: ";
+						cin >> cantidad;
+						cout << "Costo unitario: ";
+						cin >> PrecioCostoUnitario;
+						idpd[i] = idProducto;
+						can[i] = cantidad;
+						pcu[i] = PrecioCostoUnitario;
+						if (i < 40) {
+							i++;
+						}
+						cout << "Desea ingresar otro producto? (s/n): ";
+						cin >> opcion;
+					} while (opcion == 's' || opcion == 'S');
+					cout << endl;
+					fechaingreso = calcular_hora();
+					fecha_inicio_lab = calcular_hora();
+					cm.setFeIn(fechaingreso);
+					cm.setFeOr(fecha_inicio_lab);
+					cm.insertCompra(idProveedor);
+					for (int x = 0; x < i; x++) {
+						idProducto = idpd[x];
+						cantidad = can[x];
+						PrecioCostoUnitario = pcu[x];
+						cm.setProducto(idProducto);
+						cm.setCant(cantidad);
+						cm.setPCU(PrecioCostoUnitario);
+						cm.insertComprasDet();
 					}
-					cout << "Desea ingresar otro producto? (s/n): ";
-					cin >> opcion;
-				} while (opcion == 's' || opcion == 'S');
-				cout << endl;
-				fechaingreso = calcular_hora();
-				fecha_inicio_lab = calcular_hora();
-				cm.setFeIn(fechaingreso) ;
-				cm.setFeOr(fecha_inicio_lab);
-				cm.insertCompra(idProveedor);
-				for (int x = 0; x < i; x++) {
-					idProducto = idpd[x];
-					cantidad = can[x];
-					PrecioCostoUnitario = pcu[x];
-					cm.setProducto(idProducto);
-					cm.setCant(cantidad);
-					cm.setPCU(PrecioCostoUnitario);
-					cm.insertComprasDet();
 				}
+				else {
+					cout << "Numero de nit invalido" << endl;
+				}
+				
 				system("pause");
 			}break;
 
@@ -1074,3 +1123,32 @@ string calcular_hora() {
 	strftime(buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", &tm_now);
 	return buff;
 };
+
+bool revision(string n) {
+	string nit, errores;
+	nit = n;
+	bool digito = true;
+	int i = 0;
+	while (nit[i]) {
+		if (i == 7) {
+			if (nit[i] != '-') errores += "El formato es 0XXXXXX-1\n";
+			digito = false;
+		}
+		else {
+			if (!isdigit(nit[i]) && digito) {
+				errores += "solo se aceptan digitos de 0 - 9\n";
+				digito = false;
+			}
+		}	
+		i++;
+	}
+	if (nit.size() != 9) {
+		errores += "Solo se aceptan 9 caracteres\n";
+		digito = false;
+	}
+	else {
+		digito = true;
+	}
+	cout << errores << endl;
+	return digito;
+}

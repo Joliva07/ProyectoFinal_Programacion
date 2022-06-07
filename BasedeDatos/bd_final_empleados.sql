@@ -16,27 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `marcas`
+-- Table structure for table `empleados`
 --
 
-DROP TABLE IF EXISTS `marcas`;
+DROP TABLE IF EXISTS `empleados`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `marcas` (
-  `idmarca` smallint NOT NULL AUTO_INCREMENT,
-  `marca` varchar(50) NOT NULL,
-  PRIMARY KEY (`idmarca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `empleados` (
+  `idempleado` int NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(60) NOT NULL,
+  `apellidos` varchar(60) NOT NULL,
+  `direccion` varchar(80) NOT NULL,
+  `telefono` varchar(25) NOT NULL,
+  `dpi` varchar(15) NOT NULL,
+  `genero` bit(1) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `idpuesto` smallint NOT NULL,
+  `fecha_inicio_labores` date NOT NULL,
+  `fechaingreso` datetime NOT NULL,
+  PRIMARY KEY (`idempleado`),
+  KEY `idpuesto_puesto_empleados_idx` (`idpuesto`),
+  CONSTRAINT `idpuesto_puesto_empleados` FOREIGN KEY (`idpuesto`) REFERENCES `puestos` (`idPuesto`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `marcas`
---
-
-LOCK TABLES `marcas` WRITE;
-/*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -47,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26 16:19:22
+-- Dump completed on 2022-06-07 13:57:34

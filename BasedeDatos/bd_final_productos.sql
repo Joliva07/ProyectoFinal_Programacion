@@ -16,28 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `puestos`
+-- Table structure for table `productos`
 --
 
-DROP TABLE IF EXISTS `puestos`;
+DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `puestos` (
-  `idPuesto` smallint NOT NULL AUTO_INCREMENT,
-  `puesto` varchar(50) NOT NULL,
-  PRIMARY KEY (`idPuesto`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `productos` (
+  `idproductos` int NOT NULL AUTO_INCREMENT,
+  `producto` varchar(50) NOT NULL,
+  `idmarca` smallint NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
+  `imagen` varchar(30) NOT NULL,
+  `precio_costo` decimal(8,2) NOT NULL,
+  `precio_venta` decimal(8,2) NOT NULL,
+  `existencia` int NOT NULL,
+  `fecha_ingreso` datetime NOT NULL,
+  PRIMARY KEY (`idproductos`),
+  KEY `idmarca_marca_producto_idx` (`idmarca`),
+  CONSTRAINT `idmarca_marca_producto` FOREIGN KEY (`idmarca`) REFERENCES `marcas` (`idmarca`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `puestos`
---
-
-LOCK TABLES `puestos` WRITE;
-/*!40000 ALTER TABLE `puestos` DISABLE KEYS */;
-INSERT INTO `puestos` VALUES (1,'PROGRAMADOR'),(2,'ADMINISTRADOR'),(3,'SECRETARIO');
-/*!40000 ALTER TABLE `puestos` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -48,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26 16:19:23
+-- Dump completed on 2022-06-07 13:57:34
