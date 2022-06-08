@@ -129,14 +129,14 @@ public:
 		cn.abrir_conexion();
 		string where = to_string(x);
 		if (cn.getconectar()) {
-			string eliminar = "delete from empleados where dpi = " + where + ";";
+			string eliminar = "delete from empleados where idempleado= " + where + ";";
 			const char* eli = eliminar.c_str();
 			q_estado = mysql_query(cn.getconectar(), eli);
 			if (!q_estado) {
 				cout << " BORRADO EXITOSO !!!!!" << endl;
 			}
 			else {
-				cout << " xxx ERROR al hacer DELETE xxx " << endl;
+				cout << " Este empleado no puede ser borrado en este momento " << endl;
 			}
 		}
 		else {

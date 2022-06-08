@@ -79,7 +79,7 @@ public:
 					//cout << fila[0] << " , " << fila[1] << " , " << fila[2] << " , " << fila[3] << " , " << fila[4] << " , " << fila[5] << " , " << fila[6] << " , " << fila[7] << " , " << fila[8] << endl;
 					cout << "id: " << fila[0] << " \tProducto: " << fila[1] << "\tMarca: " << fila[9] << endl;
 					cout << "Descripcion: " << fila[3] << endl;
-					cout << "Precio costo: " << fila[5] << " \tPrecio venta: " << fila[6] << "\tExistencias: " << fila[8] << endl << endl;
+					cout << "Precio costo: " << fila[5] << " \tPrecio venta: " << fila[6] << "\tExistencias: " << fila[7] << endl << endl;
 				}
 			}
 			else {

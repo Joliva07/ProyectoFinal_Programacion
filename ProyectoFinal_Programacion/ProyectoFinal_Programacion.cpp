@@ -83,7 +83,7 @@ int main()
 			cout << "\t\t2 LEER" << endl;
 			cout << "\t\t3 ACTUALIZAR" << endl;
 			cout << "\t\t4 ELIMINAR" << endl;
-			cout << "\t\t5. SALIR" << endl;
+			cout << "\t\t5.SALIR" << endl;
 			cout << "\t\tELIJA !" << endl;
 			cin >> op2;
 
@@ -92,30 +92,30 @@ int main()
 				{
 			case 1:
 				system("cls");
-				cout << "ingrese nombres" << endl;
+				cout << "Ingrese nombres" << endl;
 				cin.ignore();
 				getline(cin, nombres);
-				cout << "ingrese apellidos" << endl;
+				cout << "Ingrese apellidos" << endl;
 				getline(cin, apellidos);
-				cout << "ingrese fecha nacimiento" << endl;
+				cout << "Ingrese fecha nacimiento" << endl;
 				getline(cin, fecha_nac);
-				cout << "ingrese direccion" << endl;
+				cout << "Ingrese direccion" << endl;
 				getline(cin, direccion);
-				cout << "ingrese telefono" << endl;
+				cout << "Ingrese telefono" << endl;
 				cin >> telefono;
-				cout << "ingrese DPI" << endl;
+				cout << "Ingrese DPI" << endl;
 				cin >> dpi;
-				cout << "ingrese genero (m = masculino / f = femenino)" << endl;
+				cout << "Ingrese genero (m = masculino / f = femenino)" << endl;
 				cin >> genero1;
 				genero = genero1 == 'm' ? 1 : 0;
 				
-				cout << "ingrese id puesto" << endl;
+				cout << "Ingrese id puesto" << endl;
 				cin >> idpuesto;
 				cin.ignore();
-				cout << "ingrese fecha que inicio labores" << endl;
+				cout << "Ingrese fecha que inicio labores" << endl;
 				getline(cin, fecha_inicio_lab);
 				fechaingreso = calcular_hora();
-				cout << "fecha/hora de ingreso" << fechaingreso << endl;;
+				cout << "Fecha/Hora de ingreso" << fechaingreso << endl;;
 				obj.setNombre(nombres);
 				obj.setApellido(apellidos);
 				obj.setDireccion(direccion);
@@ -143,38 +143,38 @@ int main()
 			case 3:
 				system("cls");
 				char valor;
-				cout << "ingrese el DPI del empleado a modificar" << endl;
+				cout << "Ingrese el DPI del empleado a modificar" << endl;
 				cin >> busqueda;
 				obj.leer(busqueda);
-				cout << "\nDesea modificar ? (s/n): ";
+				cout << "\nDesea modificar? (s/n): ";
 				cin >> valor;
 				if (valor == 'n') {
 					break;
 				}
 			
-						cout << "ingrese nombres" << endl;
+						cout << "Ingrese nombres" << endl;
 						cin.ignore();
 						getline(cin, nombres);
-						cout << "ingrese apellidos" << endl;
+						cout << "Ingrese apellidos" << endl;
 						getline(cin, apellidos);
-						cout << "ingrese fecha nacimiento" << endl;
+						cout << "Ingrese fecha nacimiento" << endl;
 						getline(cin, fecha_nac);
-						cout << "ingrese direccion" << endl;
+						cout << "Ingrese direccion" << endl;
 						getline(cin, direccion);
-						cout << "ingrese telefono" << endl;
+						cout << "Ingrese telefono" << endl;
 						cin >> telefono;
 						//cout << "ingrese DPI" << endl;
 						//cin >> dpi;
-						cout << "ingrese genero m/f (masculino = n / femenino = f)" << endl;
+						cout << "Ingrese genero m/f (masculino = n / femenino = f)" << endl;
 						cin >> genero1;
 						genero = genero1 == 'm' ? 1 : 0;
-						cout << "ingrese id puesto" << endl;
+						cout << "Ingrese id puesto" << endl;
 						cin >> idpuesto;
 						cin.ignore();
-						cout << "ingrese fecha que inicio labores" << endl;
+						cout << "Ingrese fecha que inicio labores" << endl;
 						getline(cin, fecha_inicio_lab);
 						fechaingreso = calcular_hora();
-						cout << "fecha/hora en que fue hecho el UPDATE : " << fechaingreso << endl;;
+						cout << "Fecha/Hora en que fue hecho el UPDATE : " << fechaingreso << endl;;
 						obj.setNombre(nombres);
 						obj.setApellido(apellidos);
 						obj.setDireccion(direccion);
@@ -197,18 +197,19 @@ int main()
 				{
 			case 4:
 				system("cls");
-				int valor = 0;
-				cout << "id a eliminar" << endl;
+				char valor = 0;
+				cout << "Id de empleado a eliminar: " << endl;
 				cin >> busqueda;
 				obj.leer(busqueda);
-				cout << "ELIMINAR? (1/0)" << endl;
+				cout << "ELIMINAR? (s/n)" << endl;
 				cin >> valor;
-					if (valor == 1) {
+					if (valor == 's'|| valor == 'S') {
 						obj.eliminar(busqueda);
 						}
 						else {
 							cout << "Accion cancelada" << endl;
 						}
+					system("pause");
 						break;
 				}
 
@@ -274,6 +275,7 @@ int main()
 					obj2.crear();
 				} else {
 					cout << "Numero de nit invalido" << endl;
+					system("pause");
 				}
 				break;
 				}
@@ -328,6 +330,7 @@ int main()
 				}
 				else {
 					cout << "Numero de nit invalido"<<endl;
+					system("pause");
 				}
 				system("pause");
 				system("cls");
@@ -353,6 +356,7 @@ int main()
 				}
 				else {
 					cout << "Numero de nit invalido" << endl;
+					system("pause");
 				}
 
 				system("cls");
@@ -595,8 +599,8 @@ int main()
 		char conf;
 		Proveedor pr = Proveedor(nombres, apellidos, direccion, fecha_nac, telefono, genero, nit);
 		cout << "Proveedores" << endl;
-		cout << "1. ingresar datos de proveedor" << endl;
-		cout << "2. ver proveedores" << endl;
+		cout << "1. Ingresar datos de proveedor" << endl;
+		cout << "2. Ver proveedores" << endl;
 		cout << "3. Actualizar datos de un proveedor" << endl;
 		cout << "4. Eliminar un proveedor" << endl;
 		cout << "5. Salir" << endl;
@@ -624,6 +628,7 @@ int main()
 				}
 				else {
 					cout << "Numero de nit invalido" << endl;
+					system("pause");
 				}
 			}break;
 			
@@ -659,6 +664,7 @@ int main()
 				}
 				else {
 					cout<<"Numero de nit invalido" << endl;
+					system("pause");
 				}
 				
 
@@ -681,6 +687,7 @@ int main()
 				}
 				else {
 					cout << "Numero de nit invalido" << endl;
+					system("pause");
 				}
 				system("pause");
 			}break;
@@ -699,11 +706,11 @@ int main()
 		float totalventa = 0;
 		Venta v = Venta(idventa,noFactura,fecha_inicio_lab,idcliente,idempleado,fechaingreso,idVentaDetalle,idProducto,cantidad);
 		cout << "REALIZAR VENTA DE PRODUCTOS" << endl;
-		cout << "ingrese opcion" << endl;
+		cout << "Ingrese opcion" << endl;
 		cout << "1. Realizar venta" << endl;
 		cout << "2. Ver las ventas realizadas" << endl;
-		cout << "3. Actualizar" << endl;
-		cout << "4. Eliminar" << endl;
+		cout << "3. Actualizar registro de venta" << endl;
+		cout << "4. Eliminar registro de venta" << endl;
 		cout << "5. Salir" << endl;
 		cout << "ELIJA!!!" << endl;
 		cin >> op2;
@@ -760,6 +767,7 @@ int main()
 			}
 			else {
 				cout << "Numero de nit invalido" << endl;
+				system("pause");
 			}
 
 			
@@ -856,10 +864,10 @@ int main()
 		Compra cm = Compra(idCompra,idCompraDetalle ,noOrdenCompra, idProveedor, idProducto, cantidad, PrecioCostoUnitario, fecha_inicio_lab, fechaingreso);
 		cout << "REALIZAR COMPRA PARA ADQUIRIR MAS PRODUCTOS" << endl;
 		cout << "ingrese opcion" << endl;
-			cout << "1. ingresar compra" << endl;
-			cout << "2. ver compras" << endl;
-			cout << "3. Actualizar" << endl;
-			cout << "4. Eliminar" << endl;
+			cout << "1. Ingresar compra" << endl;
+			cout << "2. Ver compras" << endl;
+			cout << "3. Actualizar registro de compras" << endl;
+			cout << "4. Eliminar registro de compras" << endl;
 			cout << "5. Salir" << endl;
 			cout << "ELIJA!!!" << endl;
 			cin >> op2;
@@ -907,6 +915,7 @@ int main()
 				}
 				else {
 					cout << "Numero de nit invalido" << endl;
+					system("pause");
 				}
 				
 				system("pause");
