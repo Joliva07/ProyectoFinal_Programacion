@@ -794,47 +794,50 @@ int main()
 				}break;
 			}
 		}break;
-		case 3:
+		case 3: {
 			cout << "Que desea Actualizar: " << endl;
 			cout << "1. Datos de una venta\n2. Los detalles de una venta" << endl;
 			cin >> opb;
 			switch (opb) {
-				case 1: {
-					cout << "Ingrese el numero de venta que desea actualizar: ";
-					cin >> noFactura;
-					string nf = to_string(noFactura);
+			case 1: {
+				cout << "Ingrese el numero de venta que desea actualizar: ";
+				cin >> noFactura;
+				string nf = to_string(noFactura);
+				v.Tventas(nf);
+				cout << "Ingrese nuevo nit: ";
+				cin >> idcliente;
+				cout << "Codigo de empleado que esta atendiendo: ";
+				cin >> idempleado;
+				fechaingreso = calcular_hora();
+				v.SetIdEm(idempleado);
+				v.SetFeIn(fechaingreso);
+				v.acVenta(nf, idcliente);
+			}break;
+			case 2: {
+				cout << "Ingrese el numero de venta que desea actualizar: ";
+				cin >> noFactura;
+				string nf = to_string(noFactura);
+
+				do {
+					system("cls");
 					v.Tventas(nf);
-					cout << "Ingrese nuevo nit: ";
-					cin >> idcliente;
-					cout << "Codigo de empleado que esta atendiendo: ";
-					cin >> idempleado;
-					fechaingreso = calcular_hora();
-					v.SetIdEm(idempleado);
-					v.SetFeIn(fechaingreso);
-					v.acVenta(nf, idcliente);
-				}break;
-				case 2: {
-					cout << "Ingrese el numero de venta que desea actualizar: ";
-					cin >> noFactura;
-					string nf = to_string(noFactura);
-					
-					do {
-						system("cls");
-						v.Tventas(nf);
-						cout << "Ingrese el id del detalle a actualizar: ";
-						cin >> idVentaDetalle;
-						cout << "Ingrese id del producto: ";
-						cin >> idProducto;
-						cout << "Ingrese cantidad adquirida: ";
-						cin >> cantidad;
-						v.SetidP(idProducto);
-						v.Setcant(cantidad);
-						v.acDentalle(idVentaDetalle);
-						cout << "Desea actualizar otro compra? (s/n): ";
-						cin >> opcion;
-					} while (opcion == 's' || opcion == 'S');
-				}break;
+					cout << "Ingrese el id del detalle a actualizar: ";
+					cin >> idVentaDetalle;
+					cout << "Ingrese id del producto: ";
+					cin >> idProducto;
+					cout << "Ingrese cantidad adquirida: ";
+					cin >> cantidad;
+					v.SetidP(idProducto);
+					v.Setcant(cantidad);
+					v.acDentalle(idVentaDetalle);
+					cout << "Desea actualizar otro compra? (s/n): ";
+					cin >> opcion;
+				} while (opcion == 's' || opcion == 'S');
+			}break;
 			}
+			system("pause");
+		}break;
+			
 		case 4: {
 			char conf;
 			cout << "Ingrese el no. de factura para eliminarla: ";

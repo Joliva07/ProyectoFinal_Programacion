@@ -396,7 +396,7 @@ public:
 		cn.abrir_conexion();
 
 		if (cn.getconectar()) {
-			string consulta = "select idproveedores from proeveedores where nit=" + idPro + ";";
+			string consulta = "select idproveedores from proeveedores where nit='" + idPro + "';";
 			const char* i = consulta.c_str();
 			q_consulta = mysql_query(cn.getconectar(), i);
 			if (!q_consulta) {

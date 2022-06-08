@@ -8,12 +8,9 @@
 
 using namespace std;
 
-//int numero_factura = 0;
+
 
 class Venta{
-	//idventa   noFactura   Serie    fechaFactura      idcliente(buscar por nit y luego poner el id)
-	//idempleado    fechaingreso     idventas_detalle     idproducto    cantidad    precio_unitario
-	//total
 
 private: string idventa, idcliente, idVenta_detalle;
 
@@ -471,6 +468,7 @@ public:
 			}
 			cout << "___________________________________________" << endl;
 			if (cn.getconectar()) {
+				total = 0; t2 = 0;
 				string consulta = "select d.*,p.*,m.* from ventas_detalle as d inner join productos as p on d.idproducto=p.idproductos inner join marcas as m on p.idmarca=m.idmarca where d.idventa="+idventa+";";
 				const char* c = consulta.c_str();
 				q_consulta = mysql_query(cn.getconectar(), c);
@@ -479,7 +477,7 @@ public:
 					cout << "Id Producto\tproducto\tMarca\t\tcantidad\tprecio\t\tTotal" << endl;
 					while (resultado = mysql_store_result(cn.getconectar())) {
 						fila = mysql_fetch_row(resultado);
-						cant = atof(fila[4]);
+						cant = atof(fila[3]);
 						precioUnitario = atof(fila[4]);
 						total = cant * precioUnitario;
 						cout << fila[2] << "\t\t" << fila[6] << "\t\t" << fila[15] << "\t\t" << fila[3] << "\t\t" << fila[4] << "\t\t" << total;
@@ -515,9 +513,9 @@ public:
 				fila = mysql_fetch_row(resultado);
 				idventa = fila[0];
 				cout << "\nNo. Factura: " << fila[0] << "\tSerie: " << fila[3] << "\tFecha: " << fila[4] << endl;
-				cout << "Nombre: " << fila[9] << " " << fila[10] << endl;
-				cout << "Nit: " << fila[11] << endl;
-				cout << "Atendido por: " << fila[17] << " " << fila[18] << endl;
+				cout << "Nombre: " << fila[8] << " " << fila[9] << endl;
+				cout << "Nit: " << fila[10] << endl;
+				cout << "Atendido por: " << fila[16] << " " << fila[17] << endl;
 			}
 			else {
 				cout << "Error select";
@@ -528,6 +526,7 @@ public:
 		}
 		cout << "___________________________________________" << endl;
 		if (cn.getconectar()) {
+			total = 0; t2 = 0;
 			string consulta = "select d.*,p.*,m.* from ventas_detalle as d inner join productos as p on d.idproducto=p.idproductos inner join marcas as m on p.idmarca=m.idmarca where d.idventa=" + idventa + ";";
 			const char* c = consulta.c_str();
 			q_consulta = mysql_query(cn.getconectar(), c);
@@ -562,7 +561,7 @@ public:
 		cn.abrir_conexion();
 
 		if (cn.getconectar()) {
-			string consulta = "select idclientes from clientes where nit=" + idc + ";";
+			string consulta = "select idclientes from clientes where nit='" + idc + "';";
 			const char* i = consulta.c_str();
 			q_consulta = mysql_query(cn.getconectar(), i);
 			if (!q_consulta) {
